@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: '${DB_PSSWD}'
+      POSTGRES_DB: '${DB_NAME}'
+    volumes: 
+      - 'database:/var/lib/postgresql/data'
+    expose: 
+      - 5432
+  db-client:
+    build:
+      dockerfile: ./db.Dockerfile
+    depends_on:
+      - db
+    environment:
+      PGPASSWORD: '${DB_PSSWD}'
+  app:
+    build:
+      dockerfile: ./build.Dockerfile
+    environment:
+      FROM_EMAIL: '${FROM_EMAIL}'
+      EMAIL_PASSWORD: '${EMAIL_PASSWORD}'
+      DB_PSSWD: '${DB_PSSWD}'
+      DB_NAME: '${DB_NAME}'
+      DB_HOST: '${DB_HOST}'
+      DB_USER: '${DB_USER}'
+    depends_on:
+      - db
+      - db-client
+
+volumes: 
+  database: 
+

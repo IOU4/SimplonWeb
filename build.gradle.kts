@@ -1,27 +1,25 @@
-plugins { application }
+plugins {
+  id("java")
+  id("war")
+}
 
-repositories { mavenCentral() }
+repositories { 
+  mavenCentral()
+}
 // define jdk version
 java { sourceCompatibility = JavaVersion.VERSION_17 }
 
 dependencies { 
-  implementation("org.postgresql:postgresql:42.5.0")
-    implementation("org.eclipse.angus:jakarta.mail:1.0.0")
+  compileOnly("jakarta.servlet:jakarta.servlet-api:5.0.0")
+  compileOnly("org.postgresql:postgresql:42.3.7")
 }
 
-tasks { 
-  named<JavaExec>("run") {
-    standardInput = System.`in` 
-    file(".env").readLines().forEach {
-        environment(it.split("=")[0], it.split("=")[1])
-      }
-  } 
-  jar {
-      manifest {
-        attributes["Main-Class"] = "simplonclone.Main"
-        attributes["Class-Path"] = configurations.compileClasspath.get().joinToString(" ") { it.absolutePath }
-      }
-    }
-}
+// task migrate(type:Exec) {
+//     commandLine("docker', 'exec', 'booking-db-1', 'psql', '-U', 'postgres', '-f', '/usr/local/src/schema.sql', 'booking')
+// }
+//
+// task serve(type:Exec) {
+//    commandLine('docker', 'exec', 'booking-server-1','curl','--no-progress-meter', '--user', 'tomcat:secret', 'http://localhost:8080/manager/text/reload?path=/booking-1.0')
+// }
 
-application { mainClass.set("simplonclone.Main") }
+// war.finalizedBy(serve)

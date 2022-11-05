@@ -1,10 +1,10 @@
-package simplonclone.Models;
+package simplonweb.Models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import simplonclone.App;
+import simplonweb.App;
 
 public class PromoModel {
   private static Connection con = App.getConnection();

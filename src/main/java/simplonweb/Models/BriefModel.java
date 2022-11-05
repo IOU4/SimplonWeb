@@ -1,12 +1,12 @@
-package simplonclone.Models;
+package simplonweb.Models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import simplonclone.App;
-import simplonclone.Controllers.Brief;
+import simplonweb.App;
+import simplonweb.Controllers.Brief;
 
 public class BriefModel {
   private static Connection con = App.getConnection();

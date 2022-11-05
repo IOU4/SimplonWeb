@@ -1,4 +1,4 @@
-package simplonclone.Controllers;
+package simplonweb.Controllers;
 
 public abstract class User {
   private String name;

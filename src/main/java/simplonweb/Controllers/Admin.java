@@ -1,11 +1,11 @@
-package simplonclone.Controllers;
+package simplonweb.Controllers;
 
 import java.util.LinkedHashMap;
 
-import simplonclone.App;
-import simplonclone.Models.AdminModel;
-import simplonclone.Models.InstructorModel;
-import simplonclone.Models.StudentModel;
+import simplonweb.App;
+import simplonweb.Models.AdminModel;
+import simplonweb.Models.InstructorModel;
+import simplonweb.Models.StudentModel;
 
 public class Admin extends User {
   private LinkedHashMap<String, MenuHandler> menu;

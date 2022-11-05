@@ -1,4 +1,4 @@
-package simplonclone.Controllers;
+package simplonweb.Controllers;
 
 import java.sql.Date;
 

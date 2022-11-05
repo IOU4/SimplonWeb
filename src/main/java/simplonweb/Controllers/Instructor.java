@@ -1,20 +1,11 @@
-package simplonclone.Controllers;
+package simplonweb.Controllers;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Properties;
 
-import jakarta.mail.Authenticator;
-import jakarta.mail.MessagingException;
-import jakarta.mail.PasswordAuthentication;
-import jakarta.mail.Session;
-import jakarta.mail.Transport;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
-import simplonclone.App;
-import simplonclone.Models.BriefModel;
-import simplonclone.Models.StudentModel;
+import simplonweb.App;
+import simplonweb.Models.BriefModel;
+import simplonweb.Models.StudentModel;
 
 public class Instructor extends User {
   private LinkedHashMap<String, MenuHandler> menu;
@@ -133,11 +124,6 @@ public class Instructor extends User {
       System.out.println("assigned brief to promo successfully!");
     else
       System.out.println("failed to assign brief to promo!");
-    ArrayList<Student> students = StudentModel.getStudentsByPromo(promoId);
-    if (sendEmail(students))
-      System.out.println("emails sent successfully!");
-    else
-      System.out.println("failed to send emails!");
   }
 
   private void listBriefs() {
@@ -148,37 +134,4 @@ public class Instructor extends User {
   }
 
   // send email to students using jakarta mail
-  private boolean sendEmail(ArrayList<Student> students) {
-    Properties props = new Properties();
-    props.put("mail.smtp.host", "smtp.gmail.com");
-    props.put("mail.smtp.port", "465");
-    props.put("mail.smtp.ssl.enable", "true");
-    props.put("mail.smtp.auth", "true");
-    Session session = Session.getInstance(props, new Authenticator() {
-      protected PasswordAuthentication getPasswordAuthentication() {
-        return new PasswordAuthentication("ouchaibimad000@gmail.com", "bjwcpghcbelphjnb");
-      }
-    });
-    try {
-      var msg = new MimeMessage(session);
-      msg.setFrom(new InternetAddress("ouchaibimad000@gmail.com"));
-      ArrayList<InternetAddress> to = new ArrayList<>();
-      students.forEach(student -> {
-        try {
-          to.add(new InternetAddress(student.getEmail()));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      });
-      msg.setRecipients(MimeMessage.RecipientType.TO, to.toArray(new InternetAddress[students.size()]));
-      msg.setSubject("new brief");
-      msg.setSentDate(new java.util.Date());
-      msg.setText("check your platform there is a new brief");
-      Transport.send(msg);
-      return true;
-    } catch (MessagingException e) {
-      System.out.println("err : " + e.getMessage());
-    }
-    return false;
-  }
 }

@@ -1,12 +1,12 @@
-package simplonclone.Models;
+package simplonweb.Models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import simplonclone.Controllers.Admin;
-import simplonclone.App;
+import simplonweb.Controllers.Admin;
+import simplonweb.App;
 
 public class AdminModel {
   private static Connection con = App.getConnection();

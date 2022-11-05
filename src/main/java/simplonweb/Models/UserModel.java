@@ -1,12 +1,12 @@
-package simplonclone.Models;
+package simplonweb.Models;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import simplonclone.Controllers.Admin;
-import simplonclone.App;
-import simplonclone.Controllers.User;
+import simplonweb.Controllers.Admin;
+import simplonweb.App;
+import simplonweb.Controllers.User;
 
 public class UserModel {
 

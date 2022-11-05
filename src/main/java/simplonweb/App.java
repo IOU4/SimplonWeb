@@ -1,13 +1,13 @@
-package simplonclone;
+package simplonweb;
 
 import java.sql.Connection;
 import java.util.Scanner;
 
-import simplonclone.Controllers.Admin;
-import simplonclone.Controllers.Instructor;
-import simplonclone.Controllers.Student;
-import simplonclone.Database.Database;
-import simplonclone.Models.UserModel;
+import simplonweb.Controllers.Admin;
+import simplonweb.Controllers.Instructor;
+import simplonweb.Controllers.Student;
+import simplonweb.Database.Database;
+import simplonweb.Models.UserModel;
 
 public class App {
   public static Scanner scanner = new Scanner(System.in);

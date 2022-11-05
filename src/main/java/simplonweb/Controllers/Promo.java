@@ -1,4 +1,4 @@
-package simplonclone.Controllers;
+package simplonweb.Controllers;
 
 public class Promo {
   private int id;

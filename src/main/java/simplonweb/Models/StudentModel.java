@@ -1,10 +1,10 @@
-package simplonclone.Models;
+package simplonweb.Models;
 
-import simplonclone.Controllers.Student;
+import simplonweb.Controllers.Student;
 import java.sql.*;
 import java.util.ArrayList;
 
-import simplonclone.App;
+import simplonweb.App;
 
 public class StudentModel {
   private static Connection con = App.getConnection();

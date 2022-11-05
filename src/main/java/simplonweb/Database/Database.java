@@ -1,4 +1,4 @@
-package simplonclone.Database;
+package simplonweb.Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

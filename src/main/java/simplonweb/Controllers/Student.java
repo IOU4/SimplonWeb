@@ -1,4 +1,4 @@
-package simplonclone.Controllers;
+package simplonweb.Controllers;
 
 public class Student extends User {
   public Student(String email, String name, int id) {

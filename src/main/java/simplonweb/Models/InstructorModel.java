@@ -1,10 +1,10 @@
-package simplonclone.Models;
+package simplonweb.Models;
 
-import simplonclone.Controllers.Instructor;
+import simplonweb.Controllers.Instructor;
 import java.sql.*;
 import java.util.ArrayList;
 
-import simplonclone.App;
+import simplonweb.App;
 
 public class InstructorModel {
   private static Connection con = App.getConnection();

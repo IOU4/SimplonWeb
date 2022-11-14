@@ -1,14 +1,24 @@
 package simplonweb.Controllers;
 
 import java.sql.Date;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 
 import simplonweb.App;
 import simplonweb.Models.BriefModel;
+import simplonweb.Models.InstructorModel;
 import simplonweb.Models.StudentModel;
 
 public class Instructor extends User {
-  private LinkedHashMap<String, MenuHandler> menu;
+
+  private Promo currentPromo;
+
+  public Promo getCurrentPromo() {
+    return currentPromo;
+  }
+
+  public void setCurrentPromo(Promo currentPromo) {
+    this.currentPromo = currentPromo;
+  }
 
   public Instructor(String name, String email, String psswd, int id) {
     super(name, email, psswd, id);
@@ -18,54 +28,12 @@ public class Instructor extends User {
     super(instructor.getName(), instructor.getEmail(), instructor.getPsswd(), instructor.getId());
   }
 
-  @FunctionalInterface
-  private interface MenuHandler {
-    public void run();
+  public Instructor(String name, String email, String psswd, Promo currentPromo, int id) {
+    super(name, email, psswd, id);
+    this.currentPromo = currentPromo;
   }
 
-  private void fillMenu() {
-    menu = new LinkedHashMap<>();
-    menu.put("add student", this::addStudent);
-    menu.put("add student to promo", this::addStudentToPromo);
-    menu.put("add brief", this::addBrief);
-    menu.put("assign brief to promo", this::assignBriefToPromo);
-    menu.put("list Briefs", this::listBriefs);
-  }
-
-  private void printMenu() {
-    int i = 0;
-    System.out.println("");
-    for (String key : menu.keySet()) {
-      System.out.println(++i + "- " + key);
-    }
-    System.out.println("(anything else will quit)");
-  }
-
-  public void handler() {
-    fillMenu();
-    System.out.println("hello : " + this.getName());
-    while (true) {
-      printMenu();
-      System.out.printf("choose an option: ");
-      try {
-        var choice = App.scanner.nextInt();
-        App.scanner.nextLine();
-        for (var entry : menu.entrySet()) {
-          if (choice > menu.size() && choice < 1)
-            return;
-          if (entry.getKey().equals(menu.keySet().toArray()[choice - 1])) {
-            entry.getValue().run();
-            break;
-          }
-        }
-      } catch (Exception e) {
-        System.out.println("err : " + e.getMessage());
-        return;
-      }
-    }
-  }
-
-  private void addStudent() {
+  public void addStudent() {
     System.out.printf("Student name: ");
     String name = App.scanner.nextLine();
     System.out.printf("Student email: ");
@@ -78,7 +46,7 @@ public class Instructor extends User {
       System.out.println("failed to add student '" + name + "'!");
   }
 
-  private void addStudentToPromo() {
+  public void addStudentToPromo() {
     Admin admin = new Admin();
     admin.liststudents();
     int studentId = App.scanner.nextInt();
@@ -92,7 +60,7 @@ public class Instructor extends User {
       System.out.println("failed to add student to promo!");
   }
 
-  private void addBrief() {
+  public void addBrief() {
     System.out.println("Brief title: ");
     var title = App.scanner.nextLine();
     System.out.println("Brief Contents: ");
@@ -112,7 +80,7 @@ public class Instructor extends User {
     }
   }
 
-  private void assignBriefToPromo() {
+  public void assignBriefToPromo() {
     Admin admin = new Admin();
     listBriefs();
     System.out.printf("Brief id: ");
@@ -128,12 +96,17 @@ public class Instructor extends User {
       System.out.println("failed to assign brief to promo!");
   }
 
-  private void listBriefs() {
+  public void listBriefs() {
     System.out.println("Briefs:");
     BriefModel.getAllBriefs().forEach(brief -> {
       System.out.println(brief.getId() + "- " + brief.getTitle());
     });
   }
 
-  // send email to students using jakarta mail
+  public static ArrayList<Instructor> getAll() {
+    var instructors = new ArrayList<Instructor>();
+    instructors = InstructorModel.getInstructorsWithNoPromo();
+    instructors.addAll(InstructorModel.getInstructorsWithPromo());
+    return instructors;
+  }
 }

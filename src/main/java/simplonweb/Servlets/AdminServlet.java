@@ -7,13 +7,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import simplonweb.Controllers.Instructor;
 import simplonweb.Controllers.Student;
 
 @WebServlet(name = "admin", value = "/admin")
 public class AdminServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-    var students = Student.getAll();
-    req.setAttribute("students", students);
+    req.setAttribute("students", Student.getAll());
+    req.setAttribute("instructors", Instructor.getAll());
+    // req.setAttribute("promos", Promo.getAll());
     req.getRequestDispatcher("pages/admin.jsp").forward(req, res);
   }
 }

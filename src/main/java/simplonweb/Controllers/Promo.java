@@ -4,6 +4,15 @@ public class Promo {
   private int id;
   private String name;
   private Instructor instructor;
+  private int studentsCount;
+
+  public int getStudentsCount() {
+    return studentsCount;
+  }
+
+  public void setStudentsCount(int studentsCount) {
+    this.studentsCount = studentsCount;
+  }
 
   public Promo(int id, String name, Instructor instructor) {
     this.id = id;
@@ -39,5 +48,12 @@ public class Promo {
   public void setInstructor(Instructor instructor) {
     this.instructor = instructor;
   }
+
+  // public static ArrayList<Promo> getAll() {
+  // var promos = new ArrayList<Promo>();
+  // promos = PromoModel.getPromosWithNoInstructor();
+  // promos.addAll(PromoModel.getPromosWithIntructor());
+  // return promos;
+  // }
 
 }

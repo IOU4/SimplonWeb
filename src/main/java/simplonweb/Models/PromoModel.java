@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import simplonweb.App;
+import simplonweb.Controllers.Promo;
 
 public class PromoModel {
   private static Connection con = App.getConnection();
@@ -18,6 +19,20 @@ public class PromoModel {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+    }
+  }
+
+  public static Promo getPromoById(int promoId) {
+    try {
+      PreparedStatement stmnt = con.prepareStatement("select * from promos where id = ?");
+      stmnt.setInt(1, promoId);
+      var rs = stmnt.executeQuery();
+      if (rs.next())
+        return new Promo(rs.getInt("id"), rs.getString("name"));
+      return null;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
     }
   }
 }

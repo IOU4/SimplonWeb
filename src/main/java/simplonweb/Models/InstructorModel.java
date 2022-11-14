@@ -59,11 +59,32 @@ public class InstructorModel {
     try {
       ArrayList<Instructor> instructors = new ArrayList<Instructor>();
       PreparedStatement stmnt = con
-          .prepareStatement("select * from instructors where id not in (select instructor_id from promos)");
+          .prepareStatement(
+              "select * from instructors where id not in (select instructor_id from promos where instructor_id is not null)");
       var rs = stmnt.executeQuery();
       while (rs.next()) {
         instructors
             .add(new Instructor(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
+      }
+      return instructors;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public static ArrayList<Instructor> getInstructorsWithPromo() {
+    try {
+      ArrayList<Instructor> instructors = new ArrayList<Instructor>();
+      PreparedStatement stmnt = con
+          .prepareStatement(
+              "select instructors.*, promos.id as promo_id from instructors join promos on instructors.id = promos.instructor_id where instructors.id in (select instructor_id from promos)");
+      var rs = stmnt.executeQuery();
+      while (rs.next()) {
+        var promo = PromoModel.getPromoById(rs.getInt("promo_id"));
+        instructors
+            .add(new Instructor(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), promo,
+                rs.getInt("id")));
       }
       return instructors;
     } catch (SQLException e) {

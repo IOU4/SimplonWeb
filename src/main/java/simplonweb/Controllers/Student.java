@@ -25,7 +25,6 @@ public class Student extends User {
     students = StudentModel.getStudentsWithNoInstructor();
     students.addAll(StudentModel.getStudentsWithNoPromo());
     students.addAll(StudentModel.getStudentsWithIntructor());
-    System.out.println(students.size());
     return students;
   }
 

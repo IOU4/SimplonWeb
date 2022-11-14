@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import simplonweb.Controllers.Brief;
 import simplonweb.Controllers.Instructor;
 import simplonweb.Controllers.Promo;
 import simplonweb.Controllers.Student;
@@ -17,6 +18,7 @@ public class AdminServlet extends HttpServlet {
     req.setAttribute("students", Student.getAll());
     req.setAttribute("instructors", Instructor.getAll());
     req.setAttribute("promos", Promo.getAll());
+    req.setAttribute("briefs", Brief.getAll());
     req.getRequestDispatcher("pages/admin.jsp").forward(req, res);
   }
 }

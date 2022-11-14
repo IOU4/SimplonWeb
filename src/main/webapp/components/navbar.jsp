@@ -2,8 +2,8 @@
   <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <a href="https://flowbite.com/" class="flex items-center">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo">
-        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+        <img class="h-10 mr-2 dark:bg-white dark:p-3 dark:rounded-lg" src="https://simplonline.co/static/sol-logo.png"
+          alt="logo">
       </a>
       <div class="flex md:order-2">
         <button type="button"

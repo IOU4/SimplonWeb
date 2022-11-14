@@ -1,6 +1,9 @@
 package simplonweb.Controllers;
 
 import java.sql.Date;
+import java.util.ArrayList;
+
+import simplonweb.Models.BriefModel;
 
 public class Brief {
   int id;
@@ -8,6 +11,15 @@ public class Brief {
   String content;
   Date launchDate;
   Date deadline;
+  Promo promo;
+
+  public Promo getPromo() {
+    return promo;
+  }
+
+  public void setPromo(Promo promo) {
+    this.promo = promo;
+  }
 
   public Brief(int id, String title, String content, Date launchDate, Date deadline) {
     this.id = id;
@@ -61,4 +73,9 @@ public class Brief {
     this.deadline = deadline;
   }
 
+  public static ArrayList<Brief> getAll() {
+    var briefs = new ArrayList<Brief>();
+    briefs.addAll(BriefModel.getAllBriefs());
+    return briefs;
+  }
 }

@@ -25,6 +25,20 @@
         </c:choose>
       </section>
       <section>
+        <c:set var="briefs" value="${requestScope.briefs}" />
+        <c:choose>
+          <c:when test="${briefs.size() == 0 || briefs == null}">
+            <p classs="text-gray-200 italic">no briefs found!</p>
+          </c:when>
+          <c:otherwise>
+            <h3 class="text-2xl font-bold py-4 ">Briefs:</h3>
+            <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+              <jsp:include page="/components/briefsTable.jsp" />
+            </div>
+          </c:otherwise>
+        </c:choose>
+      </section>
+      <section>
         <c:set var="instructors" value="${requestScope.instructors}" />
         <c:choose>
           <c:when test="${instructors.size() == 0 || instructors == null}">
@@ -38,18 +52,19 @@
           </c:otherwise>
         </c:choose>
       </section>
-      <c:set var="promos" value="${requestScope.promos}" />
-      <c:choose>
-        <c:when test="${promos.size() == 0 || promos == null}">
-          <p classs="text-gray-200 italic">no promos found!</p>
-        </c:when>
-        <c:otherwise>
-          <h3 class="text-2xl font-bold py-4 ">promos:</h3>
-          <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
-            <jsp:include page="/components/promosTable.jsp" />
-          </div>
-        </c:otherwise>
-      </c:choose>
+      <section>
+        <c:set var="promos" value="${requestScope.promos}" />
+        <c:choose>
+          <c:when test="${promos.size() == 0 || promos == null}">
+            <p classs="text-gray-200 italic">no promos found!</p>
+          </c:when>
+          <c:otherwise>
+            <h3 class="text-2xl font-bold py-4 ">promos:</h3>
+            <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+              <jsp:include page="/components/promosTable.jsp" />
+            </div>
+          </c:otherwise>
+        </c:choose>
       </section>
     </main>
     <jsp:include page="/components/footer.jsp" />

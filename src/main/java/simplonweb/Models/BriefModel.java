@@ -18,8 +18,15 @@ public class BriefModel {
       PreparedStatement stmnt = con.prepareStatement("select * from briefs");
       var rs = stmnt.executeQuery();
       while (rs.next()) {
-        briefs.add(new Brief(rs.getInt("id"), rs.getString("title"), rs.getString("content"), rs.getDate("launch_date"),
-            rs.getDate("deadline")));
+        if (rs.getObject("promo_id") != null) {
+          var brief = new Brief(rs.getInt("id"), rs.getString("title"), rs.getString("content"),
+              rs.getDate("launch_date"), rs.getDate("deadline"));
+          brief.setPromo(PromoModel.getPromoById(rs.getInt("promo_id")));
+          briefs.add(brief);
+        } else
+          briefs
+              .add(new Brief(rs.getInt("id"), rs.getString("title"), rs.getString("content"), rs.getDate("launch_date"),
+                  rs.getDate("deadline")));
       }
       return briefs;
     } catch (SQLException e) {
@@ -58,5 +65,4 @@ public class BriefModel {
     }
     return false;
   }
-
 }

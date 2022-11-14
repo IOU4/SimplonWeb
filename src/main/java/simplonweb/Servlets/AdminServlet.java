@@ -19,6 +19,7 @@ public class AdminServlet extends HttpServlet {
     req.setAttribute("instructors", Instructor.getAll());
     req.setAttribute("promos", Promo.getAll());
     req.setAttribute("briefs", Brief.getAll());
+    req.setAttribute("username", "me");
     req.getRequestDispatcher("pages/admin.jsp").forward(req, res);
   }
 }

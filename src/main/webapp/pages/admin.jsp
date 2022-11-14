@@ -38,6 +38,19 @@
           </c:otherwise>
         </c:choose>
       </section>
+      <c:set var="promos" value="${requestScope.promos}" />
+      <c:choose>
+        <c:when test="${promos.size() == 0 || promos == null}">
+          <p classs="text-gray-200 italic">no promos found!</p>
+        </c:when>
+        <c:otherwise>
+          <h3 class="text-2xl font-bold py-4 ">promos:</h3>
+          <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+            <jsp:include page="/components/promosTable.jsp" />
+          </div>
+        </c:otherwise>
+      </c:choose>
+      </section>
     </main>
     <jsp:include page="/components/footer.jsp" />
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>

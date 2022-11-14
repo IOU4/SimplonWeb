@@ -1,5 +1,10 @@
 package simplonweb.Controllers;
 
+import java.util.ArrayList;
+
+import simplonweb.Models.InstructorModel;
+import simplonweb.Models.PromoModel;
+
 public class Promo {
   private int id;
   private String name;
@@ -49,11 +54,18 @@ public class Promo {
     this.instructor = instructor;
   }
 
-  // public static ArrayList<Promo> getAll() {
-  // var promos = new ArrayList<Promo>();
-  // promos = PromoModel.getPromosWithNoInstructor();
-  // promos.addAll(PromoModel.getPromosWithIntructor());
-  // return promos;
-  // }
-
+  public static ArrayList<Promo> getAll() {
+    var promos = new ArrayList<Promo>();
+    InstructorModel.getInstructorsWithPromo().forEach(instructor -> {
+      var curr = instructor.getCurrentPromo();
+      curr.setStudentsCount(PromoModel.getStudentsCount(curr.getId()));
+      promos.add(instructor.getCurrentPromo());
+    });
+    PromoModel.getPromosWithNoIntructor().forEach(promo -> {
+      promo.setStudentsCount(promo.getId());
+      promos.add(promo);
+    });
+    System.out.println(promos.size());
+    return promos;
+  }
 }

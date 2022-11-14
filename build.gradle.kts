@@ -14,12 +14,16 @@ dependencies {
   compileOnly("org.postgresql:postgresql:42.3.7")
 }
 
-// task migrate(type:Exec) {
-//     commandLine("docker', 'exec', 'booking-db-1', 'psql', '-U', 'postgres', '-f', '/usr/local/src/schema.sql', 'booking')
-// }
-//
-// task serve(type:Exec) {
-//    commandLine('docker', 'exec', 'booking-server-1','curl','--no-progress-meter', '--user', 'tomcat:secret', 'http://localhost:8080/manager/text/reload?path=/booking-1.0')
-// }
+tasks.register<Exec>("serve") {
+   commandLine("docker", "exec", "simplonweb-server-1","curl","--no-progress-meter", "--user", "tomcat:secret", "http://localhost:8080/manager/text/reload?path=/SimplonWeb")
+   if(!File("build/libs/manager").exists()) {
+     println("manager file does not exist")
+     commandLine("docker", "exec","simplonweb-server-1", "cp", "-r", "/usr/local/tomcat/webapps.dist/manager", "/usr/local/tomcat/webapps/")
+   }
+}
 
-// war.finalizedBy(serve)
+tasks.register<Exec>("migrate") {
+  commandLine("docker", "exec", "simplonweb-db-1", "psql", "-U","postgres", "-c", commandLine("cat ./init.sql"), "simplon" )
+}
+
+tasks.war { finalizedBy("serve")}

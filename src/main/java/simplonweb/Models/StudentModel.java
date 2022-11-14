@@ -1,5 +1,6 @@
 package simplonweb.Models;
 
+import simplonweb.Controllers.Promo;
 import simplonweb.Controllers.Student;
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class StudentModel {
       stmnt.setString(1, email);
       var rs = stmnt.executeQuery();
       if (rs.next())
-        return new Student(rs.getString("name"), rs.getString("email"), rs.getInt("id"));
+        return new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id"));
       return null;
     } catch (SQLException e) {
       e.printStackTrace();
@@ -31,7 +32,7 @@ public class StudentModel {
       PreparedStatement stmnt = con.prepareStatement("select * from students");
       var rs = stmnt.executeQuery();
       while (rs.next()) {
-        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getInt("id")));
+        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
       }
       return students;
     } catch (SQLException e) {
@@ -48,7 +49,7 @@ public class StudentModel {
           .prepareStatement("select * from students where promo_id is null");
       var rs = stmnt.executeQuery();
       while (rs.next()) {
-        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getInt("id")));
+        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
       }
       return students;
     } catch (SQLException e) {
@@ -121,7 +122,44 @@ public class StudentModel {
       stmnt.setInt(1, promoId);
       var rs = stmnt.executeQuery();
       while (rs.next()) {
-        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getInt("id")));
+        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
+      }
+      return students;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public static ArrayList<Student> getStudentsWithNoInstructor() {
+    try {
+      ArrayList<Student> students = new ArrayList<Student>();
+      PreparedStatement stmnt = con.prepareStatement(
+          "select students.*, promos.name as promo_name from students join promos on students.promo_id = promos.id where promos.instructor_id is null");
+      var rs = stmnt.executeQuery();
+      while (rs.next()) {
+        var promo = new Promo(rs.getInt("promo_id"), rs.getString("promo_name"));
+        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"),
+            promo, rs.getInt("id")));
+      }
+      return students;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public static ArrayList<Student> getStudentsWithIntructor() {
+    try {
+      ArrayList<Student> students = new ArrayList<Student>();
+      PreparedStatement stmnt = con.prepareStatement(
+          "select students.*, promos.name as promo_name, promos.instructor_id as instructor_id from students join promos on students.promo_id = promos.id where promos.instructor_id is not null");
+      var rs = stmnt.executeQuery();
+      while (rs.next()) {
+        var instructor = InstructorModel.getInstructorById(rs.getInt("instructor_id"));
+        var promo = new Promo(rs.getInt("promo_id"), rs.getString("promo_name"), instructor);
+        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"),
+            promo, rs.getInt("id")));
       }
       return students;
     } catch (SQLException e) {

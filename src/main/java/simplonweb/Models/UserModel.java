@@ -17,7 +17,7 @@ public class UserModel {
     try {
       var rs = con.createStatement().executeQuery("select name, email, id from administrators;");
       while (rs.next()) {
-        admins.add(new Admin(rs.getString("name"), rs.getString("email"), rs.getInt("id")));
+        admins.add(new Admin(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
       }
     } catch (SQLException ex) {
       System.out.println("couldn't get admins");

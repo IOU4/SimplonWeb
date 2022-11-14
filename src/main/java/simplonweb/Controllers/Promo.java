@@ -3,13 +3,18 @@ package simplonweb.Controllers;
 public class Promo {
   private int id;
   private String name;
-  private int instructorId;
+  private Instructor instructor;
 
-  public Promo(int id, String name, int instructorId) {
+  public Promo(int id, String name, Instructor instructor) {
     this.id = id;
     this.name = name;
-    this.instructorId = instructorId;
+    this.instructor = instructor;
   }
+
+  public Promo(int id, String name) {
+    this.name = name;
+    this.id = id;
+  };
 
   public int getId() {
     return id;
@@ -27,12 +32,12 @@ public class Promo {
     this.name = name;
   }
 
-  public int getInstructorId() {
-    return instructorId;
+  public Instructor getInstructor() {
+    return instructor;
   }
 
-  public void setInstructorId(int instructorId) {
-    this.instructorId = instructorId;
+  public void setInstructor(Instructor instructor) {
+    this.instructor = instructor;
   }
 
 }

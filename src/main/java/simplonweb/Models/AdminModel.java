@@ -17,7 +17,7 @@ public class AdminModel {
       stmnt.setString(1, email);
       var rs = stmnt.executeQuery();
       if (rs.next())
-        return new Admin(rs.getString("name"), rs.getString("email"), rs.getInt("id"));
+        return new Admin(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id"));
       return null;
     } catch (SQLException e) {
       e.printStackTrace();

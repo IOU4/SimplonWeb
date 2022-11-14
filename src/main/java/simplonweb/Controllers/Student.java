@@ -1,20 +1,39 @@
 package simplonweb.Controllers;
 
+import java.util.ArrayList;
+
+import simplonweb.Models.StudentModel;
+
 public class Student extends User {
-  public Student(String email, String name, int id) {
-    super(email, name, id);
+  private Promo promo;
+
+  public Student(String email, String name, String psswd, int id) {
+    super(email, name, psswd, id);
   }
 
   public Student(Student student) {
-    super(student.getEmail(), student.getName(), student.getId());
+    super(student.getEmail(), student.getName(), student.getPsswd(), student.getId());
   }
 
-  private void printMenu() {
-    System.out.println("1- view briefs\n 2- assing student to promo\n  (anything else will quit) :");
+  public Student(String email, String name, String psswd, Promo promo, int id) {
+    super(email, name, psswd, id);
+    this.promo = promo;
   }
 
-  public void handler() {
-    System.out.println("hello : " + getName());
-    printMenu();
+  public static ArrayList<Student> getAll() {
+    var students = new ArrayList<Student>();
+    students = StudentModel.getStudentsWithNoInstructor();
+    students.addAll(StudentModel.getStudentsWithNoPromo());
+    students.addAll(StudentModel.getStudentsWithIntructor());
+    System.out.println(students.size());
+    return students;
+  }
+
+  public Promo getPromo() {
+    return promo;
+  }
+
+  public void setPromo(Promo promo) {
+    this.promo = promo;
   }
 }

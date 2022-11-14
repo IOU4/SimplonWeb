@@ -1,13 +1,15 @@
 create table if not exists administrators (
 	id serial primary key not null,
 	name text not null,
-	email text not null
+	email text not null,
+  psswd text not null
 );
 
 create table if not exists instructors (
 	id serial primary key,
 	name text not null,
-	email text not null
+	email text not null,
+  psswd text not null
 );
 
 create table if not exists promos  (
@@ -20,7 +22,8 @@ create table if not exists students (
 	id serial primary key,
 	name text not null,
 	email text not null,
-	promo_id int
+	promo_id int,
+  psswd text not null
 );
 
 create table if not exists briefs (
@@ -31,6 +34,5 @@ create table if not exists briefs (
 	promo_id int 
 );
 
-// default admin and instructor to access menus
-insert into administrators (name, email) values ('admin', 'admin@youcode.ma');
-insert into instructors (name, email) values ('instructor', 'instructor@youcode.ma');
+-- default admin and instructor to access menus
+insert into administrators (name, email, psswd) values ('admin', 'admin@youcode.ma', 'secret');

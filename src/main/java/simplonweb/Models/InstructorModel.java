@@ -15,7 +15,7 @@ public class InstructorModel {
       stmnt.setString(1, email);
       var rs = stmnt.executeQuery();
       if (rs.next())
-        return new Instructor(rs.getString("name"), rs.getString("email"), rs.getInt("id"));
+        return new Instructor(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id"));
       return null;
     } catch (SQLException e) {
       e.printStackTrace();
@@ -30,13 +30,28 @@ public class InstructorModel {
       PreparedStatement stmnt = con.prepareStatement("select * from instructors");
       var rs = stmnt.executeQuery();
       while (rs.next()) {
-        instructors.add(new Instructor(rs.getString("name"), rs.getString("email"), rs.getInt("id")));
+        instructors
+            .add(new Instructor(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
       }
       return instructors;
     } catch (SQLException e) {
       e.printStackTrace();
     }
     return null;
+  }
+
+  public static Instructor getInstructorById(int instructor_id) {
+    try {
+      PreparedStatement stmnt = con.prepareStatement("select * from instructors where id = ?");
+      stmnt.setInt(1, instructor_id);
+      var rs = stmnt.executeQuery();
+      if (rs.next())
+        return new Instructor(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id"));
+      return null;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   // get instructors with no promo
@@ -47,7 +62,8 @@ public class InstructorModel {
           .prepareStatement("select * from instructors where id not in (select instructor_id from promos)");
       var rs = stmnt.executeQuery();
       while (rs.next()) {
-        instructors.add(new Instructor(rs.getString("name"), rs.getString("email"), rs.getInt("id")));
+        instructors
+            .add(new Instructor(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
       }
       return instructors;
     } catch (SQLException e) {

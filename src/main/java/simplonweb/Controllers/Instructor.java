@@ -10,12 +10,12 @@ import simplonweb.Models.StudentModel;
 public class Instructor extends User {
   private LinkedHashMap<String, MenuHandler> menu;
 
-  public Instructor(String name, String email, int id) {
-    super(name, email, id);
+  public Instructor(String name, String email, String psswd, int id) {
+    super(name, email, psswd, id);
   }
 
   public Instructor(Instructor instructor) {
-    super(instructor.getName(), instructor.getEmail(), instructor.getId());
+    super(instructor.getName(), instructor.getEmail(), instructor.getPsswd(), instructor.getId());
   }
 
   @FunctionalInterface
@@ -70,7 +70,9 @@ public class Instructor extends User {
     String name = App.scanner.nextLine();
     System.out.printf("Student email: ");
     String email = App.scanner.nextLine();
-    if (StudentModel.addStudent(new Student(name, email, 0)))
+    System.out.printf("Student password: ");
+    String psswd = App.scanner.nextLine();
+    if (StudentModel.addStudent(new Student(name, email, psswd, 0)))
       System.out.println("added student '" + name + "' successfully!");
     else
       System.out.println("failed to add student '" + name + "'!");

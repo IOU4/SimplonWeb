@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <h3 class="text-2xl font-bold py-4 ">Students:</h3>
   <c:choose>
     <c:when test="${students.size() == 0 || students == null}">
       <p classs="text-gray-200 italic">no students found!</p>
     </c:when>
     <c:otherwise>
-      <h3 class="text-2xl font-bold py-4 ">Students:</h3>
       <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

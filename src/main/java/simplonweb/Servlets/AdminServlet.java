@@ -32,12 +32,9 @@ public class AdminServlet extends HttpServlet {
       case "addInstructor":
         Instructor.add(req.getParameter("name"), req.getParameter("email"),
             req.getParameter("psswd"));
-        // break;
-        // case "addPromo":
-        // Promo.add(req.getParameter("name"), req.getParameter("instructor"));
-        // break;
-        // case "addBrief":
-        // Brief.add(req.getParameter("name"), req.getParameter("promo"));
+        break;
+      case "addPromo":
+        Promo.add(req.getParameter("name"));
         break;
       case "deleteStudent":
         Student.delete(req.getParameter("id"));
@@ -47,9 +44,6 @@ public class AdminServlet extends HttpServlet {
         break;
       // case "deletePromo":
       // Promo.delete(req.getParameter("id"));
-      // break;
-      // case "deleteBrief":
-      // Brief.delete(req.getParameter("id"));
       // break;
       // case "updateStudent":
       // Student.update(req.getParameter("id"), req.getParameter("name"),
@@ -62,10 +56,6 @@ public class AdminServlet extends HttpServlet {
       // case "updatePromo":
       // Promo.update(req.getParameter("id"), req.getParameter("name"),
       // req.getParameter("instructor"));
-      // break;
-      // case "updateBrief":
-      // Brief.update(req.getParameter("id"), req.getParameter("name"),
-      // req.getParameter("promo"));
       // break;
     }
     res.sendRedirect("admin");

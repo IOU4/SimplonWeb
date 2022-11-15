@@ -57,14 +57,21 @@ public class Promo {
   public static ArrayList<Promo> getAll() {
     var promos = new ArrayList<Promo>();
     InstructorModel.getInstructorsWithPromo().forEach(instructor -> {
-      var curr = instructor.getCurrentPromo();
-      curr.setStudentsCount(PromoModel.getStudentsCount(curr.getId()));
-      promos.add(instructor.getCurrentPromo());
+      var promo = instructor.getCurrentPromo();
+      if (promo != null) {
+        promo.setStudentsCount(PromoModel.getStudentsCount(promo.getId()));
+        promos.add(promo);
+      }
+      // promos.add(instructor.getCurrentPromo());
     });
     PromoModel.getPromosWithNoIntructor().forEach(promo -> {
-      promo.setStudentsCount(promo.getId());
+      promo.setStudentsCount(PromoModel.getStudentsCount(promo.getId()));
       promos.add(promo);
     });
     return promos;
+  }
+
+  public static void add(String name) {
+    PromoModel.add(name);
   }
 }

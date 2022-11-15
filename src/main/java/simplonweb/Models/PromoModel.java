@@ -70,4 +70,17 @@ public class PromoModel {
       return 0;
     }
   }
+
+  public static boolean add(String name) {
+    try {
+      PreparedStatement stmnt = con.prepareStatement("insert into promos (name) values (?)");
+      stmnt.setString(1, name);
+      stmnt.executeUpdate();
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
+
 }

@@ -15,7 +15,7 @@
               <th scope="col" class="py-3 px-6"> LaunchDate </th>
               <th scope="col" class="py-3 px-6"> Deadline </th>
               <th scope="col" class="py-3 px-6"> Promo </th>
-              <th scope="col" class="py-3 px-6"> Action </th>
+              <!-- <th scope="col" class="py-3 px-6"> Action </th> -->
             </tr>
           </thead>
           <tbody>
@@ -39,13 +39,12 @@
                     </c:otherwise>
                   </c:choose>
                 </td>
-                <td class=" py-4 px-6 space-x-2">
-                  <!-- Modal toggle -->
-                  <a href="#" type="button" data-modal-toggle="editUserModal"
-                    class="font-bold text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                  <a href="#" type="button" data-modal-toggle="delelteUserModal"
-                    class="font-bold text-red-300 eark:text-red-300 hover:underline">Delete</a>
-                </td>
+                <!-- <td class=" py-4 px-6 space-x-2"> -->
+                <!--   <a href="#" type="button" data-modal-toggle="editUserModal" -->
+                <!--     class="font-bold text-blue-600 dark:text-blue-500 hover:underline">Edit</a> -->
+                <!--   <a href="#" type="button" data-modal-toggle="delelteUserModal" -->
+                <!--     class="font-bold text-red-300 eark:text-red-300 hover:underline">Delete</a> -->
+                <!-- </td> -->
               </tr>
             </c:forEach>
           </tbody>

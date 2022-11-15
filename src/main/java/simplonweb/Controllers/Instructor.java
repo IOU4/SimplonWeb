@@ -85,4 +85,8 @@ public class Instructor extends User {
   public static void delete(String id) {
     InstructorModel.delete(Integer.parseInt(id));
   }
+
+  public static void assign(String instructorId, String promoId) {
+    InstructorModel.assign(Integer.parseInt(instructorId), Integer.parseInt(promoId));
+  }
 }

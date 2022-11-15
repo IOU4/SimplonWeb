@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <div x-data="{showAdd: false, showDelete: false, showEdit: false, currId: 0}">
+  <div x-data="{showAdd: false, showDelete: false, showAssign: false, currId: 0}">
     <div class="flex items-center w-full justify-between my-4">
       <h3 class="text-2xl font-bold py-4 ">Instructors:</h3>
       <button type="button" @click="showAdd = true"
@@ -41,11 +41,12 @@
                     </c:choose>
                   </td>
                   <td class=" py-4 px-6 space-x-2">
-                    <!-- Modal toggle -->
-                    <!-- <a href="#" type="button" data-modal-toggle="editUserModal" -->
-                    <!--   class="font-bold text-blue-600 dark:text-blue-500 hover:underline">Edit</a> -->
                     <button type="button" @click="() => {showDelete = true; currId = '${instructor.getId()}'}"
                       class="font-bold text-red-300 eark:text-red-300 hover:underline">Delete</button>
+                    <c:if test="${instructor.getCurrentPromo() == null}">
+                      <button type="button" @click="() => {showAssign = true; currId = '${instructor.getId()}'}"
+                        class="font-bold text-blue-300 eark:text-blue-300 hover:underline">assign</button>
+                    </c:if>
                   </td>
                 </tr>
               </c:forEach>
@@ -136,4 +137,41 @@
         </div>
       </div>
     </div>
+
+    <!-- assign modal -->
+    <div x-show="showAssign" tabindex="-1"
+      class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full flex bg-gray-700 bg-opacity-50">
+      <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
+          <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">assign instructor to promo:</h3>
+          <form class="space-y-6" action="#" method="post">
+            <div>
+              <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Promo
+                Name:</label>
+              <select name="promoId" id="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                placeholder="select promo">
+                <c:forEach items="${promos}" var="promo">
+                  <c:if test="${promo.getInstructor() == null}">
+                    <option value="${promo.getId()}">${promo.getName()}</option>
+                  </c:if>
+                </c:forEach>
+              </select>
+            </div>
+            <div class="flex justify-center items-center space-x-4">
+              <button type="button" @click="showAssign = false"
+                class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                cancel </button>
+              <button type="submit"
+                class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Save </button>
+            </div>
+            <input type="hidden" name="instructorId" :value="currId">
+            <input type="hidden" name="action" value="assingInstructor">
+          </form>
+        </div>
+      </div>
+    </div>
+
   </div>

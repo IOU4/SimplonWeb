@@ -119,4 +119,17 @@ public class InstructorModel {
       return false;
     }
   }
+
+  public static boolean assign(int instructorId, int promoId) {
+    try {
+      PreparedStatement stmnt = con.prepareStatement("update promos set instructor_id = ? where id = ?");
+      stmnt.setInt(1, instructorId);
+      stmnt.setInt(2, promoId);
+      stmnt.executeUpdate();
+      return true;
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      return false;
+    }
+  }
 }

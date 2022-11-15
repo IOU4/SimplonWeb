@@ -42,6 +42,9 @@ public class AdminServlet extends HttpServlet {
       case "deleteInstructor":
         Instructor.delete(req.getParameter("id"));
         break;
+      case "assingInstructor":
+        Instructor.assign(req.getParameter("instructorId"), req.getParameter("promoId"));
+        break;
       // case "deletePromo":
       // Promo.delete(req.getParameter("id"));
       // break;

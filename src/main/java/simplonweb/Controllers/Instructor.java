@@ -33,17 +33,8 @@ public class Instructor extends User {
     this.currentPromo = currentPromo;
   }
 
-  public void addStudent() {
-    System.out.printf("Student name: ");
-    String name = App.scanner.nextLine();
-    System.out.printf("Student email: ");
-    String email = App.scanner.nextLine();
-    System.out.printf("Student password: ");
-    String psswd = App.scanner.nextLine();
-    if (StudentModel.add(new Student(name, email, psswd, 0)))
-      System.out.println("added student '" + name + "' successfully!");
-    else
-      System.out.println("failed to add student '" + name + "'!");
+  public static void add(String name, String email, String psswd) {
+    InstructorModel.add(new Instructor(name, email, psswd, 0));
   }
 
   public void addStudentToPromo() {
@@ -80,27 +71,8 @@ public class Instructor extends User {
     }
   }
 
-  public void assignBriefToPromo() {
-    Admin admin = new Admin();
-    listBriefs();
-    System.out.printf("Brief id: ");
-    var briefId = App.scanner.nextInt();
-    App.scanner.nextLine();
-    admin.listPromos();
-    System.out.printf("Promo id: ");
-    var promoId = App.scanner.nextInt();
-    App.scanner.nextLine();
-    if (BriefModel.assignBriefToPromo(briefId, promoId))
-      System.out.println("assigned brief to promo successfully!");
-    else
-      System.out.println("failed to assign brief to promo!");
-  }
-
-  public void listBriefs() {
-    System.out.println("Briefs:");
-    BriefModel.getAllBriefs().forEach(brief -> {
-      System.out.println(brief.getId() + "- " + brief.getTitle());
-    });
+  public void assignBriefToPromo(String briefId, String promoId) {
+    BriefModel.assignBriefToPromo(Integer.parseInt(briefId), Integer.parseInt(promoId));
   }
 
   public static ArrayList<Instructor> getAll() {

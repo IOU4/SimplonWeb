@@ -94,11 +94,12 @@ public class InstructorModel {
   }
 
   // add new instructor
-  public static boolean addInstructor(Instructor instructor) {
+  public static boolean add(Instructor instructor) {
     try {
-      PreparedStatement stmnt = con.prepareStatement("insert into instructors (name, email) values (?, ?)");
+      PreparedStatement stmnt = con.prepareStatement("insert into instructors (name, email, psswd) values (?, ?, ?)");
       stmnt.setString(1, instructor.getName());
       stmnt.setString(2, instructor.getEmail());
+      stmnt.setString(3, instructor.getPsswd());
       stmnt.executeUpdate();
       return true;
     } catch (SQLException e) {

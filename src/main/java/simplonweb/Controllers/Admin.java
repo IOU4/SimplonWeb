@@ -25,7 +25,7 @@ public class Admin extends User {
     String email = App.scanner.nextLine();
     System.out.printf("Instructor password: ");
     String psswd = App.scanner.nextLine();
-    if (InstructorModel.addInstructor(new Instructor(name, email, psswd, 0)))
+    if (InstructorModel.add(new Instructor(name, email, psswd, 0)))
       System.out.println("added instructor '" + name + "' successfully!");
     else
       System.out.println("failed to add instructor '" + name + "'!");

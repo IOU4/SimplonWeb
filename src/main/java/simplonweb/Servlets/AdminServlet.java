@@ -29,16 +29,16 @@ public class AdminServlet extends HttpServlet {
       case "addStudent":
         Student.add(req.getParameter("name"), req.getParameter("email"), req.getParameter("psswd"));
         break;
-      // case "addInstructor":
-      // Instructor.add(req.getParameter("name"), req.getParameter("email"),
-      // req.getParameter("promo"));
-      // break;
-      // case "addPromo":
-      // Promo.add(req.getParameter("name"), req.getParameter("instructor"));
-      // break;
-      // case "addBrief":
-      // Brief.add(req.getParameter("name"), req.getParameter("promo"));
-      // break;
+      case "addInstructor":
+        Instructor.add(req.getParameter("name"), req.getParameter("email"),
+            req.getParameter("psswd"));
+        // break;
+        // case "addPromo":
+        // Promo.add(req.getParameter("name"), req.getParameter("instructor"));
+        // break;
+        // case "addBrief":
+        // Brief.add(req.getParameter("name"), req.getParameter("promo"));
+        break;
       case "deleteStudent":
         Student.delete(req.getParameter("id"));
         break;

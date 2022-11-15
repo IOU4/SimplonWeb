@@ -81,4 +81,8 @@ public class Instructor extends User {
     instructors.addAll(InstructorModel.getInstructorsWithPromo());
     return instructors;
   }
+
+  public static void delete(String id) {
+    InstructorModel.delete(Integer.parseInt(id));
+  }
 }

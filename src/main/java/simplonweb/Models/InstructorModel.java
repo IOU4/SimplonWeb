@@ -108,4 +108,15 @@ public class InstructorModel {
     }
   }
 
+  public static boolean delete(int id) {
+    try {
+      PreparedStatement stmnt = con.prepareStatement("delete from instructors where id = ?");
+      stmnt.setInt(1, id);
+      stmnt.executeUpdate();
+      return true;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return false;
+    }
+  }
 }

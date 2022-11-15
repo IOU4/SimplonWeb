@@ -65,7 +65,6 @@ public class Promo {
       promo.setStudentsCount(promo.getId());
       promos.add(promo);
     });
-    System.out.println(promos.size());
     return promos;
   }
 }

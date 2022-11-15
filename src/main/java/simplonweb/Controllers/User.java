@@ -7,10 +7,10 @@ public abstract class User {
   private String psswd;
 
   public User(String name, String email, String psswd, int id) {
-    this.email = email;
     this.name = name;
-    this.id = id;
+    this.email = email;
     this.psswd = psswd;
+    this.id = id;
   }
 
   public User() {

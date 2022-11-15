@@ -73,11 +73,12 @@ public class StudentModel {
   }
 
   // add new student
-  public static boolean addStudent(Student student) {
+  public static boolean add(Student student) {
     try {
-      PreparedStatement stmnt = con.prepareStatement("insert into students (name, email) values (?, ?)");
+      PreparedStatement stmnt = con.prepareStatement("insert into students (name, email, psswd) values (?, ?,?)");
       stmnt.setString(1, student.getName());
       stmnt.setString(2, student.getEmail());
+      stmnt.setString(3, student.getPsswd());
       stmnt.executeUpdate();
       return true;
     } catch (SQLException e) {
@@ -87,7 +88,7 @@ public class StudentModel {
   }
 
   // remove student
-  public static boolean removeStudent(int id) {
+  public static boolean delete(int id) {
     try {
       PreparedStatement stmnt = con.prepareStatement("delete from students where id = ?");
       stmnt.setInt(1, id);

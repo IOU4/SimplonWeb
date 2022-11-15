@@ -40,7 +40,7 @@ public class Instructor extends User {
     String email = App.scanner.nextLine();
     System.out.printf("Student password: ");
     String psswd = App.scanner.nextLine();
-    if (StudentModel.addStudent(new Student(name, email, psswd, 0)))
+    if (StudentModel.add(new Student(name, email, psswd, 0)))
       System.out.println("added student '" + name + "' successfully!");
     else
       System.out.println("failed to add student '" + name + "'!");

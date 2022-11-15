@@ -7,16 +7,16 @@ import simplonweb.Models.StudentModel;
 public class Student extends User {
   private Promo promo;
 
-  public Student(String email, String name, String psswd, int id) {
-    super(email, name, psswd, id);
+  public Student(String name, String email, String psswd, int id) {
+    super(name, email, psswd, id);
   }
 
   public Student(Student student) {
-    super(student.getEmail(), student.getName(), student.getPsswd(), student.getId());
+    super(student.getName(), student.getEmail(), student.getPsswd(), student.getId());
   }
 
-  public Student(String email, String name, String psswd, Promo promo, int id) {
-    super(email, name, psswd, id);
+  public Student(String name, String email, String psswd, Promo promo, int id) {
+    super(name, email, psswd, id);
     this.promo = promo;
   }
 
@@ -34,5 +34,14 @@ public class Student extends User {
 
   public void setPromo(Promo promo) {
     this.promo = promo;
+  }
+
+  public static void add(String name, String email, String psswd) {
+    StudentModel.add(new Student(name, email, psswd, -1));
+  }
+
+  public static void delete(String studentId) {
+    System.out.println("student id: " + studentId);
+    StudentModel.delete(Integer.parseInt(studentId));
   }
 }

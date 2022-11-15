@@ -22,4 +22,52 @@ public class AdminServlet extends HttpServlet {
     req.setAttribute("username", req.getSession().getAttribute("name"));
     req.getRequestDispatcher("pages/admin.jsp").forward(req, res);
   }
+
+  protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    String action = req.getParameter("action");
+    switch (action) {
+      case "addStudent":
+        Student.add(req.getParameter("name"), req.getParameter("email"), req.getParameter("psswd"));
+        break;
+      // case "addInstructor":
+      // Instructor.add(req.getParameter("name"), req.getParameter("email"),
+      // req.getParameter("promo"));
+      // break;
+      // case "addPromo":
+      // Promo.add(req.getParameter("name"), req.getParameter("instructor"));
+      // break;
+      // case "addBrief":
+      // Brief.add(req.getParameter("name"), req.getParameter("promo"));
+      // break;
+      case "deleteStudent":
+        Student.delete(req.getParameter("id"));
+        break;
+      // case "deleteInstructor":
+      // Instructor.delete(req.getParameter("id"));
+      // break;
+      // case "deletePromo":
+      // Promo.delete(req.getParameter("id"));
+      // break;
+      // case "deleteBrief":
+      // Brief.delete(req.getParameter("id"));
+      // break;
+      // case "updateStudent":
+      // Student.update(req.getParameter("id"), req.getParameter("name"),
+      // req.getParameter("email"), req.getParameter("promo"));
+      // break;
+      // case "updateInstructor":
+      // Instructor.update(req.getParameter("id"), req.getParameter("name"),
+      // req.getParameter("email"), req.getParameter("promo"));
+      // break;
+      // case "updatePromo":
+      // Promo.update(req.getParameter("id"), req.getParameter("name"),
+      // req.getParameter("instructor"));
+      // break;
+      // case "updateBrief":
+      // Brief.update(req.getParameter("id"), req.getParameter("name"),
+      // req.getParameter("promo"));
+      // break;
+    }
+    res.sendRedirect("admin");
+  }
 }

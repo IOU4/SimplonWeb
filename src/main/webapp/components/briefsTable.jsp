@@ -1,10 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <div class="flex items-center w-full justify-between my-4">
+    <h3 class="text-2xl font-bold py-4 ">Briefs:</h3>
+  </div>
   <c:choose>
     <c:when test="${briefs.size() == 0 || briefs == null}">
       <p classs="text-gray-200 italic">no briefs found!</p>
     </c:when>
     <c:otherwise>
-      <h3 class="text-2xl font-bold py-4 ">Briefs:</h3>
       <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

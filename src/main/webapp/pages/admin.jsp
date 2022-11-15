@@ -12,6 +12,7 @@
     <jsp:include page="/components/navbar.jsp" />
     <main
       x-data="{tab: 'students', active: 'inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500', inactive:'inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300'}">
+      <c:set var="role" value="admin" scope="request" />
       <nav
         class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
         <ul class="flex flex-wrap -mb-px">
@@ -34,19 +35,15 @@
         </ul>
       </nav>
       <section x-show="tab === 'students'">
-        <c:set var="students" value="${requestScope.students}" />
         <jsp:include page="/components/studentsTable.jsp" />
       </section>
       <section x-show="tab === 'briefs'">
-        <c:set var="briefs" value="${requestScope.briefs}" />
         <jsp:include page="/components/briefsTable.jsp" />
       </section>
       <section x-show="tab === 'instructors'">
-        <c:set var="instructors" value="${requestScope.instructors}" />
         <jsp:include page="/components/instructorsTable.jsp" />
       </section>
       <section x-show="tab === 'promos'">
-        <c:set var="promos" value="${requestScope.promos}" />
         <jsp:include page="/components/promosTable.jsp" />
       </section>
     </main>

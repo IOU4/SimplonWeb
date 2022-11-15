@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <div x-data="{showAdd: false, showDelete: false, showEdit: false, currId: 0}">
+  <div x-data="{showAdd: false, showDelete: false,  currId: 0}">
     <div class="flex items-center w-full justify-between my-4">
       <h3 class="text-2xl font-bold py-4 ">Students:</h3>
       <button @click="showAdd = true" type="button"
@@ -60,11 +60,10 @@
                     </c:choose>
                   </td>
                   <td class=" py-4 px-6 space-x-2">
-                    <!-- Modal toggle -->
-                    <!-- <button @click="showEdit = true && currId = '${student.getId()}' " type="button" -->
-                    <!--   class="font-bold text-blue-600 dark:text-blue-500 hover:underline">Edit</button> -->
-                    <button @click="() => {showDelete = true ; currId = '${student.getId()}'}" type="button"
-                      class="font-bold text-red-300 eark:text-red-300 hover:underline">Delete</button>
+                    <c:if test='${role == "amdin"}'>
+                      <button @click="() => {showDelete = true ; currId = '${student.getId()}'}" type="button"
+                        class="font-bold text-red-300 eark:text-red-300 hover:underline">Delete</button>
+                    </c:if>
                   </td>
                 </tr>
               </c:forEach>

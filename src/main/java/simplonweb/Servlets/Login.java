@@ -37,10 +37,10 @@ public class Login extends HttpServlet {
         role = "instructor";
       session.setAttribute("email", email);
       session.setAttribute("name", user.getName());
+      session.setAttribute("userId", user.getId());
       session.setAttribute("role", role);
       res.sendRedirect("home");
     } else
       req.getRequestDispatcher("pages/login.jsp").forward(req, res);
   }
-
 }

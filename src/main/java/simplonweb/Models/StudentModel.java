@@ -140,8 +140,9 @@ public class StudentModel {
       var rs = stmnt.executeQuery();
       while (rs.next()) {
         var promo = new Promo(rs.getInt("promo_id"), rs.getString("promo_name"));
-        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"),
-            promo, rs.getInt("id")));
+        var student = new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id"));
+        student.setPromo(promo);
+        students.add(student);
       }
       return students;
     } catch (SQLException e) {
@@ -159,8 +160,31 @@ public class StudentModel {
       while (rs.next()) {
         var instructor = InstructorModel.getInstructorById(rs.getInt("instructor_id"));
         var promo = new Promo(rs.getInt("promo_id"), rs.getString("promo_name"), instructor);
-        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"),
-            promo, rs.getInt("id")));
+        var student = new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id"));
+        student.setPromo(promo);
+        students.add(student);
+      }
+      return students;
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public static ArrayList<Student> getStudentsByInstructor(int instructoId) {
+    try {
+      ArrayList<Student> students = new ArrayList<Student>();
+      PreparedStatement stmnt = con.prepareStatement(
+          "select students.* from students where promo_id in (select instructor_id from promos where instructor_id = ?)");
+      stmnt.setInt(1, instructoId);
+      var rs = stmnt.executeQuery();
+      while (rs.next()) {
+        var instructor = InstructorModel.getInstructorById(instructoId);
+        var promo = PromoModel.getPromoById(rs.getInt("promo_id"));
+        promo.setInstructor(instructor);
+        var student = new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id"));
+        student.setPromo(promo);
+        students.add(student);
       }
       return students;
     } catch (SQLException e) {

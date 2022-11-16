@@ -22,11 +22,8 @@
           </a>
         </div>
         <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-cta">
-          <a href="#"
-            class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-            aria-current="page">
-            ${requestScope.username}
-          </a>
+          <p class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+            aria-current="page"> ${requestScope.username} </p>
         </div>
       </div>
     </nav>

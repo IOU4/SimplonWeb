@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import simplonweb.App;
 import simplonweb.Models.BriefModel;
 import simplonweb.Models.InstructorModel;
-import simplonweb.Models.StudentModel;
 
 public class Instructor extends User {
 
@@ -35,20 +34,6 @@ public class Instructor extends User {
 
   public static void add(String name, String email, String psswd) {
     InstructorModel.add(new Instructor(name, email, psswd, 0));
-  }
-
-  public void addStudentToPromo() {
-    Admin admin = new Admin();
-    admin.liststudents();
-    int studentId = App.scanner.nextInt();
-    App.scanner.nextLine();
-    admin.listPromos();
-    int promoId = App.scanner.nextInt();
-    App.scanner.nextLine();
-    if (StudentModel.addStudentToPromo(studentId, promoId))
-      System.out.println("added student to promo successfully!");
-    else
-      System.out.println("failed to add student to promo!");
   }
 
   public void addBrief() {

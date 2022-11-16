@@ -15,11 +15,6 @@ public class Student extends User {
     super(student.getName(), student.getEmail(), student.getPsswd(), student.getId());
   }
 
-  public Student(String name, String email, String psswd, Promo promo, int id) {
-    super(name, email, psswd, id);
-    this.promo = promo;
-  }
-
   public static ArrayList<Student> getAll() {
     var students = new ArrayList<Student>();
     students = StudentModel.getStudentsWithNoInstructor();
@@ -44,4 +39,13 @@ public class Student extends User {
     System.out.println("student id: " + studentId);
     StudentModel.delete(Integer.parseInt(studentId));
   }
+
+  public static ArrayList<Student> getStudentsByInstructor(int instructorId) {
+    return StudentModel.getStudentsByInstructor(instructorId);
+  }
+
+  public static void addStudentToPromo(String studentId, String promoId) {
+    StudentModel.addStudentToPromo(Integer.parseInt(studentId), Integer.parseInt(promoId));
+  }
+
 }

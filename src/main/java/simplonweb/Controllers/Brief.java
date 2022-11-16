@@ -78,4 +78,14 @@ public class Brief {
     briefs.addAll(BriefModel.getAllBriefs());
     return briefs;
   }
+
+  public static ArrayList<Brief> getBriefsWithNoPromo() {
+    var briefs = BriefModel.getAllBriefs();
+    briefs.removeIf(brief -> brief.getPromo() != null);
+    return briefs;
+  }
+
+  public static void assignBrief(String briefId, String promoId) {
+    BriefModel.assignBriefToPromo(Integer.parseInt(briefId), Integer.parseInt(promoId));
+  }
 }

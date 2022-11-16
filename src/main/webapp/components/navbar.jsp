@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <header>
-    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900 sticky">
       <div class="container flex flex-wrap justify-between items-center mx-auto">
         <a class="flex items-center">
           <img class="h-10 mr-2 dark:bg-white dark:p-3 dark:rounded-lg" src="https://simplonline.co/static/sol-logo.png"

@@ -9,6 +9,12 @@ RUN ["curl", "https://jdbc.postgresql.org/download/postgresql-42.5.0.jar", "--ou
 RUN ["curl", "https://repo1.maven.org/maven2/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/2.0.0/jakarta.servlet.jsp.jstl-api-2.0.0.jar", "--output", "lib/jakarta.servlet.jsp.jstl-api-2.0.0.jar"]
 RUN ["curl", "https://repo.maven.apache.org/maven2/org/glassfish/web/jakarta.servlet.jsp.jstl/2.0.0/jakarta.servlet.jsp.jstl-2.0.0.jar", "--output", "lib/jakarta.servlet.jsp.jstl-2.0.0.jar"]
 
+# download jakarta mail
+RUN ["curl", "https://repo.maven.apache.org/maven2/org/eclipse/angus/angus-core/1.0.0/angus-core-1.0.0.jar", "--output", "lib/angus-core-1.0.0.jar"]
+RUN ["curl", "https://repo1.maven.org/maven2/jakarta/mail/jakarta.mail-api/2.1.0/jakarta.mail-api-2.1.0.jar", "--output", "lib/jakarta.mail-api-2.1.0.jar"]
+RUN ["curl", "https://repo1.maven.org/maven2/org/eclipse/angus/angus-activation/1.0.0/angus-activation-1.0.0.jar", "--output", "lib/angus-activation-1.0.0.jar"]
+RUN ["curl", "https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar", "--output", "lib/jakarta.activation-api-2.1.0.jar"]
+RUN ["curl", "https://repo1.maven.org/maven2/org/eclipse/angus/jakarta.mail/1.0.0/jakarta.mail-1.0.0.jar", "--output", "lib/jakarta.mail-1.0.0.jar"]
 
 FROM base as dev
 # enable tomcat-manager for reloading the app in dev

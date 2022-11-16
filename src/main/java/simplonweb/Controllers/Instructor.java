@@ -2,7 +2,6 @@ package simplonweb.Controllers;
 
 import java.sql.Date;
 import java.util.ArrayList;
-
 import simplonweb.App;
 import simplonweb.Models.BriefModel;
 import simplonweb.Models.InstructorModel;
@@ -74,4 +73,5 @@ public class Instructor extends User {
   public static void assign(String instructorId, String promoId) {
     InstructorModel.assign(Integer.parseInt(instructorId), Integer.parseInt(promoId));
   }
+
 }

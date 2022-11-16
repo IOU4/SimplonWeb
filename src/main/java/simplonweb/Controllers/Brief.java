@@ -2,8 +2,18 @@ package simplonweb.Controllers;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Properties;
+
+import jakarta.mail.Authenticator;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 
 import simplonweb.Models.BriefModel;
+import simplonweb.Models.StudentModel;
 
 public class Brief {
   int id;
@@ -91,5 +101,46 @@ public class Brief {
 
   public static void assignBrief(String briefId, String promoId) {
     BriefModel.assignBriefToPromo(Integer.parseInt(briefId), Integer.parseInt(promoId));
+    if (sendEmail(StudentModel.getStudentsByPromo(Integer.parseInt(promoId))))
+      System.out.println("emails sent.");
+    else
+      System.out.println("failed to send emails.");
+  }
+
+  private static boolean sendEmail(ArrayList<Student> students) {
+    Properties props = new Properties();
+    props.put("mail.smtp.host", "smtp.gmail.com");
+    props.put("mail.smtp.port", "465");
+    props.put("mail.smtp.ssl.enable", "true");
+    props.put("mail.smtp.auth", "true");
+    Session session = Session.getInstance(props, new Authenticator() {
+      protected PasswordAuthentication getPasswordAuthentication() {
+        return new PasswordAuthentication(System.getenv("FROM_EMAIL"), System.getenv("EMAIL_PASSWORD"));
+      }
+    });
+    try {
+      var msg = new MimeMessage(session);
+      msg.setFrom(new InternetAddress(System.getenv("FROM_EMAIL")));
+      ArrayList<InternetAddress> to = new ArrayList<>();
+      students.forEach(student -> {
+        try {
+          to.add(new InternetAddress(student.getEmail()));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
+      msg.setRecipients(MimeMessage.RecipientType.TO, to.toArray(new InternetAddress[students.size()]));
+      msg.setSubject("new brief");
+      msg.setSentDate(new java.util.Date());
+      msg.setText("check your platform there is a new brief");
+      Transport.send(msg);
+      return true;
+    } catch (MessagingException e) {
+      System.out.println("err : " + e.getMessage());
+      System.out.println("username: " + System.getenv("FROM_EMAIL"));
+      System.out.println("psswd: " + System.getenv("EMAIL_PASSWORD"));
+      e.printStackTrace();
+    }
+    return false;
   }
 }

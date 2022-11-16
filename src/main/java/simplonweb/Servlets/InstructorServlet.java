@@ -30,6 +30,10 @@ public class InstructorServlet extends HttpServlet {
       case "addStudentToPromo":
         Student.addStudentToPromo(req.getParameter("studentId"), req.getParameter("promoId"));
         break;
+      case "addBrief":
+        Brief.add(req.getParameter("title"), req.getParameter("content"), req.getParameter("launchDate"),
+            req.getParameter("deadline"));
+        break;
       case "assignBrief":
         Brief.assignBrief(req.getParameter("briefId"), req.getParameter("promoId"));
         break;

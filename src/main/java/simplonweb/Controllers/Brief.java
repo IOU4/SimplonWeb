@@ -85,6 +85,10 @@ public class Brief {
     return briefs;
   }
 
+  public static void add(String title, String content, String launchDate, String deadline) {
+    BriefModel.addBrief(new Brief(0, title, content, Date.valueOf(launchDate), Date.valueOf(deadline)));
+  }
+
   public static void assignBrief(String briefId, String promoId) {
     BriefModel.assignBriefToPromo(Integer.parseInt(briefId), Integer.parseInt(promoId));
   }

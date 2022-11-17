@@ -2,10 +2,16 @@ package simplonweb.Models;
 
 import simplonweb.Controllers.Promo;
 import simplonweb.Controllers.Student;
+import simplonweb.Entities.StudentEntity;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import simplonweb.App;
+import simplonweb.Config.Config;
 
 public class StudentModel {
   private static Connection con = App.getConnection();
@@ -25,20 +31,19 @@ public class StudentModel {
     }
   }
 
-  // get all students
-  public static ArrayList<Student> getAllStudents() {
+  // get all students using hibernate
+  public static List<StudentEntity> getAllStudents() {
     try {
-      ArrayList<Student> students = new ArrayList<Student>();
-      PreparedStatement stmnt = con.prepareStatement("select * from students");
-      var rs = stmnt.executeQuery();
-      while (rs.next()) {
-        students.add(new Student(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
-      }
+      EntityManager em = Config.getInstance().getEm();
+      em.getTransaction().begin();
+      TypedQuery<StudentEntity> query = em.createQuery("SELECT s FROM StudentEntity s", StudentEntity.class);
+      List<StudentEntity> students = query.getResultList();
+      em.getTransaction().commit();
       return students;
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
+      return null;
     }
-    return null;
   }
 
   // get students with no promo

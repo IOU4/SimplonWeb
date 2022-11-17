@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "student", value = "/student")
 public class StudentServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    req.setAttribute("username", req.getSession().getAttribute("name"));
+    req.setAttribute("role", "student");
     req.getRequestDispatcher("pages/student.jsp").forward(req, res);
   }
 }

@@ -13,6 +13,7 @@ dependencies {
   compileOnly("jakarta.servlet:jakarta.servlet-api:5.0.0")
   compileOnly("org.postgresql:postgresql:42.3.7")
   compileOnly("org.eclipse.angus:jakarta.mail:1.0.0")
+  compileOnly("org.hibernate.orm:hibernate-core:6.0.0.Final")
 }
 
 tasks.register<Exec>("serve") {

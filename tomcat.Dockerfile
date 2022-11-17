@@ -16,6 +16,11 @@ RUN ["curl", "https://repo1.maven.org/maven2/org/eclipse/angus/angus-activation/
 RUN ["curl", "https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar", "--output", "lib/jakarta.activation-api-2.1.0.jar"]
 RUN ["curl", "https://repo1.maven.org/maven2/org/eclipse/angus/jakarta.mail/1.0.0/jakarta.mail-1.0.0.jar", "--output", "lib/jakarta.mail-1.0.0.jar"]
 
+# download jakarta persistence and hibernate
+RUN ["curl", "https://repo1.maven.org/maven2/jakarta/persistence/jakarta.persistence-api/3.0.0/jakarta.persistence-api-3.0.0.jar", "--output", "lib/jakarta.persistence-api-3.0.0.jar"]
+RUN ["curl", "https://repo1.maven.org/maven2/org/hibernate/hibernate-core/5.6.0.Final/hibernate-core-jakarta-5.6.0.Final.jar", "--output", "lib/hibernate-core-jakarta-5.6.0.Final.jar"]
+RUN ["curl", "https://repo1.maven.org/maven2/org/hibernate/hibernate-entitymanager/5.6.0.Final/hibernate-entitymanager-5.6.0.Final.jar", "--output", "lib/hibernate-entitymanager-5.6.0.Final.jar"]
+
 FROM base as dev
 # enable tomcat-manager for reloading the app in dev
 RUN ["cp", "-r", "webapps.dist/manager", "webapps/"]

@@ -6,8 +6,13 @@
   <jsp:include page="/components/headers.jsp" />
 </head>
 
-<body>
-  hello student
+<body class="px-3">
+  <jsp:include page="/components/navbar.jsp" />
+  <main>
+    hello student
+
+  </main>
+  <jsp:include page="/components/footer.jsp" />
 </body>
 
 </html>

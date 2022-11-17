@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = { "/admin", "/student" })
+@WebFilter(urlPatterns = { "/admin", "/student", "/instructor" })
 public class Auth implements Filter {
   public Auth() {
   }

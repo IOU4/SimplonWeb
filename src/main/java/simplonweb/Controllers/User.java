@@ -44,8 +44,4 @@ public abstract class User {
   public int getId() {
     return id;
   }
-
-  public static User find(String email) {
-    return new Admin("test", "test", "test", 1);
-  }
 }

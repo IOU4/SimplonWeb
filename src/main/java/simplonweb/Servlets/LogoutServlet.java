@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "logout", value = "/logout")
-public class Logout extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     var session = req.getSession();

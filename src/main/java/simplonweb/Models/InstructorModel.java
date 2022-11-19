@@ -128,7 +128,7 @@ public class InstructorModel {
       stmnt.executeUpdate();
       return true;
     } catch (SQLException e) {
-      System.out.println(e.getMessage());
+      e.printStackTrace();
       return false;
     }
   }

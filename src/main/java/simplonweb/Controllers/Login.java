@@ -4,7 +4,7 @@ import simplonweb.Models.AdminModel;
 import simplonweb.Models.InstructorModel;
 import simplonweb.Models.StudentModel;
 
-public class LoginService {
+public class Login {
   public static User login(String email, String psswd) {
     var admin = AdminModel.find(email);
     if (admin != null && admin.getPsswd().equals(psswd))

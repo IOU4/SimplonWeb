@@ -136,9 +136,6 @@ public class Brief {
       Transport.send(msg);
       return true;
     } catch (MessagingException e) {
-      System.out.println("err : " + e.getMessage());
-      System.out.println("username: " + System.getenv("FROM_EMAIL"));
-      System.out.println("psswd: " + System.getenv("EMAIL_PASSWORD"));
       e.printStackTrace();
     }
     return false;

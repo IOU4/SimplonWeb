@@ -21,9 +21,34 @@ public class Auth implements Filter {
       throws IOException, ServletException {
     var hreq = (HttpServletRequest) req;
     var hres = (HttpServletResponse) res;
-    if (hreq.getSession().getAttribute("name") == null)
+    // get url path
+    var path = hreq.getRequestURI();
+    var role = hreq.getSession().getAttribute("role");
+    // compare to corresponding servlet
+    if (role == null)
       hres.sendRedirect("login");
-    else
-      chain.doFilter(req, res);
+    switch (path) {
+      case "/admin":
+        if (role == "admin")
+          chain.doFilter(req, res);
+        else
+          hres.sendRedirect("login");
+        break;
+      case "/student":
+        if (role == "student")
+          chain.doFilter(req, res);
+        else
+          hres.sendRedirect("login");
+        break;
+      case "/instructor":
+        if (role == "instructor")
+          chain.doFilter(req, res);
+        else
+          hres.sendRedirect("login");
+        break;
+      default:
+        hres.sendRedirect("login");
+        break;
+    }
   }
 }

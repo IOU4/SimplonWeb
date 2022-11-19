@@ -36,7 +36,6 @@ public class Student extends User {
   }
 
   public static void delete(String studentId) {
-    System.out.println("student id: " + studentId);
     StudentModel.delete(Integer.parseInt(studentId));
   }
 
@@ -47,5 +46,4 @@ public class Student extends User {
   public static void addStudentToPromo(String studentId, String promoId) {
     StudentModel.addStudentToPromo(Integer.parseInt(studentId), Integer.parseInt(promoId));
   }
-
 }

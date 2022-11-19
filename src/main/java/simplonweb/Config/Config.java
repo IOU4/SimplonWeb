@@ -9,7 +9,7 @@ public class Config {
   private static Config instance;
 
   private Config() {
-    emf = Persistence.createEntityManagerFactory("simplonweb");
+    emf = Persistence.createEntityManagerFactory("simplon");
   }
 
   public static Config getInstance() {

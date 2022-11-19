@@ -5,22 +5,6 @@ WORKDIR /usr/local/tomcat/
 # download postgresql jdbc
 RUN ["curl", "https://jdbc.postgresql.org/download/postgresql-42.5.0.jar", "--output", "./lib/postgresql-42.5.0.jar" ]
 
-# download jakarta jstl 
-RUN ["curl", "https://repo1.maven.org/maven2/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/2.0.0/jakarta.servlet.jsp.jstl-api-2.0.0.jar", "--output", "lib/jakarta.servlet.jsp.jstl-api-2.0.0.jar"]
-RUN ["curl", "https://repo.maven.apache.org/maven2/org/glassfish/web/jakarta.servlet.jsp.jstl/2.0.0/jakarta.servlet.jsp.jstl-2.0.0.jar", "--output", "lib/jakarta.servlet.jsp.jstl-2.0.0.jar"]
-
-# download mail dependencies
-RUN ["curl", "https://repo.maven.apache.org/maven2/org/eclipse/angus/angus-core/1.0.0/angus-core-1.0.0.jar", "--output", "lib/angus-core-1.0.0.jar"]
-RUN ["curl", "https://repo1.maven.org/maven2/jakarta/mail/jakarta.mail-api/2.1.0/jakarta.mail-api-2.1.0.jar", "--output", "lib/jakarta.mail-api-2.1.0.jar"]
-RUN ["curl", "https://repo1.maven.org/maven2/org/eclipse/angus/angus-activation/1.0.0/angus-activation-1.0.0.jar", "--output", "lib/angus-activation-1.0.0.jar"]
-RUN ["curl", "https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/2.1.0/jakarta.activation-api-2.1.0.jar", "--output", "lib/jakarta.activation-api-2.1.0.jar"]
-RUN ["curl", "https://repo.maven.apache.org/maven2/org/eclipse/angus/smtp/1.0.0/smtp-1.0.0.jar", "--output", "lib/smtp-1.0.0.jar"]
-
-# # download jakarta persistence and hibernate
-# RUN ["curl", "https://repo1.maven.org/maven2/jakarta/persistence/jakarta.persistence-api/3.0.0/jakarta.persistence-api-3.0.0.jar", "--output", "lib/jakarta.persistence-api-3.0.0.jar"]
-# RUN ["curl", "https://repo1.maven.org/maven2/org/hibernate/hibernate-core/5.6.0.Final/hibernate-core-jakarta-5.6.0.Final.jar", "--output", "lib/hibernate-core-jakarta-5.6.0.Final.jar"]
-# RUN ["curl", "https://repo1.maven.org/maven2/org/hibernate/hibernate-entitymanager/5.6.0.Final/hibernate-entitymanager-5.6.0.Final.jar", "--output", "lib/hibernate-entitymanager-5.6.0.Final.jar"]
-
 FROM base as dev
 # enable tomcat-manager for reloading the app in dev
 RUN ["cp", "-r", "webapps.dist/manager", "webapps/"]

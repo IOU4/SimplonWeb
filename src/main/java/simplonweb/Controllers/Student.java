@@ -1,7 +1,9 @@
 package simplonweb.Controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import simplonweb.Entities.StudentEntity;
 import simplonweb.Models.StudentModel;
 
 public class Student extends User {
@@ -15,12 +17,13 @@ public class Student extends User {
     super(student.getName(), student.getEmail(), student.getPsswd(), student.getId());
   }
 
-  public static ArrayList<Student> getAll() {
-    var students = new ArrayList<Student>();
-    students = StudentModel.getStudentsWithNoInstructor();
-    students.addAll(StudentModel.getStudentsWithNoPromo());
-    students.addAll(StudentModel.getStudentsWithIntructor());
-    return students;
+  public static List<StudentEntity> getAll() {
+    // var students = new ArrayList<Student>();
+    // students = StudentModel.getStudentsWithNoInstructor();
+    // students.addAll(StudentModel.getStudentsWithNoPromo());
+    // students.addAll(StudentModel.getStudentsWithIntructor());
+    // return students;
+    return StudentModel.getAllStudents();
   }
 
   public Promo getPromo() {

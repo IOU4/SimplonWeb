@@ -3,7 +3,7 @@ package simplonweb.Entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "instructors", schema = "simplonweb", catalog = "")
+@Table(name = "instructors")
 public class InstructorEntity {
 
   @GeneratedValue(strategy = GenerationType.IDENTITY)

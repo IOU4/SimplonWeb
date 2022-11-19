@@ -5,7 +5,7 @@ import java.sql.Date;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "briefs", schema = "simplonweb", catalog = "")
+@Table(name = "briefs")
 public class BriefEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
@@ -23,7 +23,9 @@ public class BriefEntity {
   @Basic
   @Column(name = "deadline")
   private Date deadline;
-  @JoinColumn(name = "promoId", referencedColumnName = "id")
+
+  @ManyToOne
+  @JoinColumn(name = "promo_id", referencedColumnName = "id")
   private PromoEntity currentPromo;
 
   @Override

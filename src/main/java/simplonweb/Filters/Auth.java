@@ -11,7 +11,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebFilter(urlPatterns = { "/admin", "/student", "/instructor" })
+@WebFilter(urlPatterns = { "/student", "/instructor" })
 public class Auth implements Filter {
   public Auth() {
   }
@@ -31,20 +31,14 @@ public class Auth implements Filter {
       case "/admin":
         if (role == "admin")
           chain.doFilter(req, res);
-        else
-          hres.sendRedirect("login");
         break;
       case "/student":
         if (role == "student")
           chain.doFilter(req, res);
-        else
-          hres.sendRedirect("login");
         break;
       case "/instructor":
         if (role == "instructor")
           chain.doFilter(req, res);
-        else
-          hres.sendRedirect("login");
         break;
       default:
         hres.sendRedirect("login");

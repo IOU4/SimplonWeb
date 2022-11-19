@@ -3,7 +3,7 @@ package simplonweb.Entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "students", schema = "simplonweb", catalog = "")
+@Table(name = "students")
 public class StudentEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
@@ -18,7 +18,9 @@ public class StudentEntity {
   @Basic
   @Column(name = "psswd")
   private String psswd;
-  @JoinColumn(name = "promoId", referencedColumnName = "id")
+
+  @OneToOne
+  @JoinColumn(name = "promo_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "promo_id_fk"))
   private PromoEntity promo;
 
   @Override

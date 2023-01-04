@@ -11,6 +11,8 @@ public class Database {
     try {
       var url = "jdbc:postgresql://" + System.getenv("DB_HOST") + ":5432/" + database;
       this.con = DriverManager.getConnection(url, username, passwd);
+      // list all drivers
+      DriverManager.getDrivers().asIterator().forEachRemaining(System.out::println);
     } catch (SQLException e) {
       e.printStackTrace();
       close_db();

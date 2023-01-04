@@ -7,15 +7,12 @@ import jakarta.persistence.*;
 public class PromoEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
-  @Column(name = "id")
   private int id;
 
-  @Basic
-  @Column(name = "name")
   private String name;
 
-  @OneToOne
-  @JoinColumn(name = "instructor_id", referencedColumnName = "id")
+  @OneToOne(optional = true)
+  @JoinColumn(name = "instructor_id", nullable = true, updatable = true)
   private InstructorEntity instructor;
 
   @Override

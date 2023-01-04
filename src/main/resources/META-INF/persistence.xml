@@ -11,12 +11,16 @@
         <class>simplonweb.Entities.BriefEntity</class>
         <class>simplonweb.Entities.PromoEntity</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://db:5432/simplon"/>
-            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.username" value="postgres"/>
-            <property name="hibernate.connection.password" value="secret"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://db:5432/simplon"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="secret"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <!-- set hibernate to use the postgres dialect -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
         </properties>
     </persistence-unit>
 </persistence>

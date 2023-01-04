@@ -1,6 +1,8 @@
 package simplonweb.Controllers;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import simplonweb.Entities.InstructorEntity;
 import simplonweb.Models.BriefModel;
 import simplonweb.Models.InstructorModel;
 
@@ -36,11 +38,8 @@ public class Instructor extends User {
     BriefModel.assignBriefToPromo(Integer.parseInt(briefId), Integer.parseInt(promoId));
   }
 
-  public static ArrayList<Instructor> getAll() {
-    var instructors = new ArrayList<Instructor>();
-    instructors = InstructorModel.getInstructorsWithNoPromo();
-    instructors.addAll(InstructorModel.getInstructorsWithPromo());
-    return instructors;
+  public static List<InstructorEntity> getAll() {
+    return InstructorModel.getAllInstructors();
   }
 
   public static void delete(String id) {

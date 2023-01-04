@@ -8,20 +8,24 @@ public class InstructorEntity {
 
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
-  @Column(name = "id")
   private int id;
 
-  @Basic
-  @Column(name = "name")
   private String name;
 
-  @Basic
-  @Column(name = "email")
   private String email;
 
-  @Basic
-  @Column(name = "psswd")
   private String psswd;
+
+  @OneToOne(mappedBy = "instructor")
+  private PromoEntity currentPromo;
+
+  public PromoEntity getCurrentPromo() {
+    return currentPromo;
+  }
+
+  public void setCurrentPromo(PromoEntity currentPromo) {
+    this.currentPromo = currentPromo;
+  }
 
   public int getId() {
     return id;

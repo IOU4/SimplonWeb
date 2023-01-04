@@ -19,7 +19,7 @@ public class StudentEntity {
   @Column(name = "psswd")
   private String psswd;
 
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "promo_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "promo_id_fk"))
   private PromoEntity promo;
 

@@ -1,12 +1,19 @@
 package simplonweb.Models;
 
 import simplonweb.Controllers.Instructor;
+import simplonweb.Entities.InstructorEntity;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import simplonweb.App;
+import simplonweb.Config.Config;
 
 public class InstructorModel {
+  private static EntityManager em = Config.getInstance().getEm();
   private static Connection con = App.getConnection();
 
   public static Instructor find(String email) {
@@ -24,17 +31,14 @@ public class InstructorModel {
   }
 
   // get all instructors
-  public static ArrayList<Instructor> getAllInstructors() {
+  public static List<InstructorEntity> getAllInstructors() {
     try {
-      ArrayList<Instructor> instructors = new ArrayList<Instructor>();
-      PreparedStatement stmnt = con.prepareStatement("select * from instructors");
-      var rs = stmnt.executeQuery();
-      while (rs.next()) {
-        instructors
-            .add(new Instructor(rs.getString("name"), rs.getString("email"), rs.getString("psswd"), rs.getInt("id")));
-      }
+      em.getTransaction().begin();
+      TypedQuery<InstructorEntity> query = em.createQuery("SELECT i FROM InstructorEntity i", InstructorEntity.class);
+      List<InstructorEntity> instructors = query.getResultList();
+      em.getTransaction().commit();
       return instructors;
-    } catch (SQLException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
     return null;

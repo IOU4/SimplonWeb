@@ -3,6 +3,7 @@ package simplonweb.Entities;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "administrators")
 public class AdminEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id

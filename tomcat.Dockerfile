@@ -6,7 +6,8 @@ WORKDIR /usr/local/tomcat/
 RUN ["curl", "https://jdbc.postgresql.org/download/postgresql-42.5.0.jar", "--output", "./lib/postgresql-42.5.0.jar" ]
 
 FROM base as dev
-# enable tomcat-manager for reloading the app in dev
+
+# enable tomcat-manager for faster reloading 
 RUN ["cp", "-r", "webapps.dist/manager", "webapps/"]
 RUN echo '\
   <?xml version="1.0" encoding="UTF-8"?>\
